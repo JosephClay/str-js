@@ -3,13 +3,13 @@ str-js
 
 `npm install str-js`
 
-A string store with nesting, singular and plural selection, and string formating.
+A simple string store with nesting, singular and plural selection, and string formating.
 
 Call `str.print('with.delineated.keys');` and str will return the formatted string.
 
 Strings can be added to the str-js at anytime by calling `str.extend({ the_new: 'strings' });`
 
-#Example
+#Basic Example
 
 ```js
 str.extend({
@@ -26,4 +26,21 @@ str.print('foo.bar'); // => 'hello'
 str.print('foo.baz'); // => 'world'
 str(3).print('foo.baz'); // => 'worlds'
 str.print('does_not_exist'); // => ''
+```
+
+#Example with Formatting
+
+```js
+str.extend({
+    foo: {
+        via_arguments: 'hello {0}',
+        via_array: 'hello {0}',
+        via_object: 'hello {place}'
+    }
+});
+
+// all print 'hello world'
+str.print('foo.via_arguments', 'world');
+str.print('foo.via_array', 'world');
+str.print('foo.via_object', { place: 'world' });
 ```
