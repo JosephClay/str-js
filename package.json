@@ -1,0 +1,19 @@
+{
+  "name": "str-js",
+  "version": "0.0.1",
+  "description": "A string store with nesting, singular and plural selection, and string formating.",
+  "main": "str.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JosephClay/str-js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JosephClay/str-js/issues"
+  },
+  "homepage": "https://github.com/JosephClay/str-js"
+}
