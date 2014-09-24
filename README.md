@@ -5,7 +5,8 @@ str-js
 
 A simple string store with nesting, singular and plural selection, and string formating.
 
-Call `str.print('with.delineated.keys');` and str will return the formatted string.
+Call `str.print('with.delineated.keys');` and str will return the formatted string. If you
+dont want to use ".", a different delimiter can be set with `str.delimiter = '_';`.
 
 Strings can be added to the str-js at anytime by calling `str.extend({ the_new: 'strings' });`
 
@@ -43,4 +44,7 @@ str.extend({
 str.print('foo.via_arguments', 'world');
 str.print('foo.via_array', 'world');
 str.print('foo.via_object', { place: 'world' });
+
+str.globals = { place: 'other world' };
+str.print('foo.via_object'); // => 'hello other world'
 ```
