@@ -24,6 +24,12 @@
 
         }(Array.prototype.slice)),
 
+        _hasSize = function(obj) {
+            if (!obj) { return false; }
+            for (var key in obj) { return true; }
+            return false;
+        },
+
         _toString = Object.prototype.toString,
 
         _isObject = function(obj) {
@@ -77,25 +83,32 @@
 
         print: function(name, firstParam) {
             var args = arguments,
-                str = _get(name, this.qty);
+                str = _get(name, this.qty),
+                result;
 
             this.qty = null;
 
             // Formatting can be done by passing
             // a named object as a parameter
             if (_isObject(firstParam)) {
-                return _formatViaObject(str, firstParam);
+                result = _formatViaObject(str, firstParam);
+                if (_hasSize(Api.globals)) { result = _formatViaObject(result, Api.globals); }
+                return result;
             }
 
             // Or an array of parameters
             if (_isArray(firstParam)) {
-                return _formatViaArray(str, firstParam);
+                result = _formatViaArray(str, firstParam);
+                if (_hasSize(Api.globals)) { result = _formatViaObject(result, Api.globals); }
+                return result;
             }
 
             // Or as normal parameters (the arguments)
             var argsArr = _slice(args);
             argsArr.shift();
-            return _formatViaArray(str, argsArr);
+            result = _formatViaArray(str, argsArr);
+            if (_hasSize(Api.globals)) { result = _formatViaObject(result, Api.globals); }
+            return result;
         },
 
         get: function(name) {
@@ -111,10 +124,14 @@
         }
     };
 
-    var Api = _extend(function(qty) { return new Str(qty); },
-        { delimiter: '.' },
-        Str.prototype
-    );
+    var Api = _extend(function(qty) {
+        return new Str(qty);
+    },
+    Str.prototype,
+    {
+        globals: {},
+        delimiter: '.'
+    });
 
     var _rStore = (function() {
 
