@@ -188,7 +188,11 @@
     };
 
     var _formatViaArray = function(str, arr) {
-        var idx = arr.length - 1;
+        var len = arr.length,
+            idx = len - 1;
+
+        if (!len) { return str; }
+
         while (idx--) {
             str = str.replace(_rStore.get(idx), arr[idx]);
         }

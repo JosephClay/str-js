@@ -1,6 +1,6 @@
 {
   "name": "str-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A string store with nesting, singular and plural selection, and string formating.",
   "main": "str.js",
   "scripts": {
