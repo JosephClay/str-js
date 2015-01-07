@@ -126,11 +126,10 @@
 
     var Api = _extend(function(qty) {
         return new Str(qty);
-    },
-    Str.prototype,
-    {
+    }, Str.prototype, {
         globals: {},
-        delimiter: '.'
+        delimiter: '.',
+        joint: '\n'
     });
 
     var _rStore = (function() {
@@ -165,6 +164,11 @@
         if (!_exists(loc)) {
             _warn(name);
             return '';
+        }
+
+        // If the loc is an array, treat it as a string
+        if (_isArray(loc)) {
+            return loc.join(Api.joint);
         }
 
         // If the loc is a string, qty doesn't matter
